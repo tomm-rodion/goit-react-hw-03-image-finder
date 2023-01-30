@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export class SearchBar extends Component {
+export class Searchbar extends Component {
   state = {
     query: '',
   };
