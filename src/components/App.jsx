@@ -1,8 +1,7 @@
-import { Button } from './Button/Button';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
-
+import { Button } from './Button/Button';
 import { fetchImg } from './Service/FetchImages';
 import { Searchbar } from './Searchbar/Searchbar';
 
