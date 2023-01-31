@@ -3,7 +3,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { fetchImg } from './Service/FetchImages';
-import { Searchbar } from './Searchbar/Searchbar';
+import { Searchbar } from './SearchBar/SearchBar';
 
 export class App extends Component {
   state = {
