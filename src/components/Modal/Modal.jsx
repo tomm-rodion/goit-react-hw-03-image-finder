@@ -1,5 +1,7 @@
 import { Component } from 'react';
+import { createPortal } from 'react-dom';
 
+const modalRef = document.querySelector('#root-modal');
 export class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.onCloseByEsc);
@@ -15,12 +17,13 @@ export class Modal extends Component {
   };
   render() {
     const { largeImg, onClose } = this.props;
-    return (
+    return createPortal(
       <div className="Overlay" onClick={onClose}>
         <div className="Modal">
           <img src={largeImg} alt="bigImg" />
         </div>
-      </div>
+      </div>,
+      modalRef
     );
   }
 }

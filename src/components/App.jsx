@@ -11,22 +11,39 @@ export class App extends Component {
     images: [],
     page: 1,
     isLoading: false,
+    totalImgs: 0,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
     if (prevState.query !== query || prevState.page !== page) {
-      fetchImg(query, page)
-        .then(resp => {
-          this.setState(({ images }) => ({
-            images: [...images, ...resp.hits],
-          }));
-        })
-        .finally(() => {
-          this.setState({ isLoading: false });
-        });
+      this.handleFeachImg(query, page);
+      // fetchImg(query, page)
+      //   .then(resp => {
+      //     this.setState(({ images }) => ({
+      //       images: page === 1 ? [...resp.hits] : [...images, ...resp.hits],
+      //       totalImgs: resp.totalHits,
+      //     }));
+      //   })
+      //   .finally(() => {
+      //     this.setState({ isLoading: false });
+      //   });
     }
   }
+  //метод публічного класу handleFeachImg на asinc/awit
+  handleFeachImg = async (query, page) => {
+    try {
+      const resp = await fetchImg(query, page);
+      this.setState(({ images }) => ({
+        images: page === 1 ? [...resp.hits] : [...images, ...resp.hits],
+        totalImgs: resp.totalHits,
+      }));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
 
   handleLoadMore = () => {
     this.setState(({ page }) => ({ page: page + 1, isLoading: true }));
@@ -35,7 +52,16 @@ export class App extends Component {
   handleSubmit = query => {
     this.setState({ query, isLoading: true });
   };
-
+  renderButtonOnLoader = () => {
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
+      this.state.images.length !== 0 &&
+        this.state.images.length < this.state.totalImgs && (
+          <Button onClick={this.handleLoadMore} />
+        )
+    );
+  };
   render() {
     return (
       <div
@@ -49,15 +75,9 @@ export class App extends Component {
           alignItems: 'center',
         }}
       >
-        {/* {this.state.isLoading && <Loader />} */}
         <Searchbar onSubmit={this.handleSubmit} />
         <ImageGallery images={this.state.images} />
-        {this.state.isLoading ? (
-          <Loader />
-        ) : (
-          !!this.state.images.length && <Button onClick={this.handleLoadMore} />
-        )}
-        {/* {this.state.isLoading && <Loader />} */}
+        {this.renderButtonOnLoader()}
       </div>
     );
   }
