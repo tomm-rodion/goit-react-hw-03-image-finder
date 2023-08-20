@@ -17,20 +17,14 @@ export class App extends Component {
   componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
     if (prevState.query !== query || prevState.page !== page) {
-      this.handleFeachImg(query, page);
-      // fetchImg(query, page)
-      //   .then(resp => {
-      //     this.setState(({ images }) => ({
-      //       images: page === 1 ? [...resp.hits] : [...images, ...resp.hits],
-      //       totalImgs: resp.totalHits,
-      //     }));
-      //   })
-      //   .finally(() => {
-      //     this.setState({ isLoading: false });
-      //   });
+      console.log(
+        'повторний запуск componentDidUpdate, пішов запит на зображення ...'
+      );
+      const resQuery = query.slice(query.indexOf('/') + 1);
+      this.handleFeachImg(resQuery, page);
     }
   }
-  //метод публічного класу handleFeachImg на asinc/awit
+
   handleFeachImg = async (query, page) => {
     try {
       const resp = await fetchImg(query, page);
@@ -50,8 +44,10 @@ export class App extends Component {
   };
 
   handleSubmit = query => {
-    this.setState({ query, isLoading: true });
+    console.log('handleSubmit: ', query);
+    this.setState({ query, isLoading: true, images: [] });
   };
+
   renderButtonOnLoader = () => {
     return this.state.isLoading ? (
       <Loader />
@@ -62,6 +58,7 @@ export class App extends Component {
         )
     );
   };
+
   render() {
     return (
       <div

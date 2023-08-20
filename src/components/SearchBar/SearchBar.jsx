@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import React, { Component } from 'react';
 
 export class Searchbar extends Component {
@@ -8,10 +10,19 @@ export class Searchbar extends Component {
   hendeleChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
   };
+
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.query);
+    this.props.onSubmit(`${nanoid()}/${this.state.query}`);
+    this.resetQuery();
   };
+
+  resetQuery = () => {
+    this.setState({
+      query: '',
+    });
+  };
+
   render() {
     const { query } = this.state;
     return (
