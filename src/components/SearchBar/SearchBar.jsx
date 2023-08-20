@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 
 import React, { Component } from 'react';
+import { Form, ButtonSearchImg } from './Searchbar.styled';
 
 export class Searchbar extends Component {
   state = {
@@ -26,22 +27,21 @@ export class Searchbar extends Component {
   render() {
     const { query } = this.state;
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <header>
+        <Form onSubmit={this.handleSubmit}>
+          <ButtonSearchImg type="submit">
+            <span>Search</span>
+          </ButtonSearchImg>
           <input
             name="query"
             value={query}
             onChange={this.hendeleChange}
-            className="input"
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
-        </form>
+        </Form>
       </header>
     );
   }

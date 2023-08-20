@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { createPortal } from 'react-dom';
 
 const modalRef = document.querySelector('#root-modal');
+
 export class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.onCloseByEsc);
@@ -12,7 +13,7 @@ export class Modal extends Component {
 
   onCloseByEsc = e => {
     if (e.code === 'Escape') {
-      this.props.onClick();
+      this.props.onClose();
     }
   };
   render() {
