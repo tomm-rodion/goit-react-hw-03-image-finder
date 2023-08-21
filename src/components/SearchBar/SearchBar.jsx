@@ -1,7 +1,9 @@
 import { nanoid } from 'nanoid';
+import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
 
 import React, { Component } from 'react';
-import { Form, ButtonSearchImg } from './Searchbar.styled';
+import { Form, InputSearchBar } from './Searchbar.styled';
 
 export class Searchbar extends Component {
   state = {
@@ -29,10 +31,15 @@ export class Searchbar extends Component {
     return (
       <header>
         <Form onSubmit={this.handleSubmit}>
-          <ButtonSearchImg type="submit">
+          <Button
+            variant="outlined"
+            startIcon={<SearchIcon />}
+            type="submit"
+            sx={{ bgcolor: `primary.light`, color: 'white' }}
+          >
             <span>Search</span>
-          </ButtonSearchImg>
-          <input
+          </Button>
+          <InputSearchBar
             name="query"
             value={query}
             onChange={this.hendeleChange}

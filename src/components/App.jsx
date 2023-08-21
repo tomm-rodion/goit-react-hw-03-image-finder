@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
-import { Button } from './Button/Button';
+// import { Button } from './Button/Button';
+
+import Button from '@mui/material/Button';
 import { fetchImg } from './Service/FetchImages';
 import { Searchbar } from './SearchBar/SearchBar';
 
@@ -54,7 +56,17 @@ export class App extends Component {
     ) : (
       this.state.images.length !== 0 &&
         this.state.images.length < this.state.totalImgs && (
-          <Button onClick={this.handleLoadMore} />
+          <Button
+            variant="outlined"
+            sx={{
+              bgcolor: `primary.light`,
+              color: 'white',
+              marginTop: '12px',
+            }}
+            onClick={this.handleLoadMore}
+          >
+            Load More
+          </Button>
         )
     );
   };
