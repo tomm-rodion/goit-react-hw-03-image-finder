@@ -5,10 +5,10 @@ export const Form = styled.form`
   margin-bottom: 15px;
 `;
 
-export const ButtonSearchImg = styled.button`
-  margin-right: 5px;
-  padding: 3px;
-`;
+// export const ButtonSearchImg = styled.button`
+//   margin-right: 5px;
+//   padding: 3px;
+// `;
 export const InputSearchBar = styled.input`
   min-width: 260px;
   min-height: 35px;
