@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 
 import React, { Component } from 'react';
-import { Form, InputSearchBar } from './Searchbar.styled';
+// import { Form, InputSearchBar } from './Searchbar.styled';
 
 export class Searchbar extends Component {
   state = {
@@ -30,7 +30,7 @@ export class Searchbar extends Component {
     const { query } = this.state;
     return (
       <header>
-        <Form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <Button
             variant="outlined"
             startIcon={<SearchIcon />}
@@ -39,7 +39,7 @@ export class Searchbar extends Component {
           >
             <span>Search</span>
           </Button>
-          <InputSearchBar
+          <input
             name="query"
             value={query}
             onChange={this.hendeleChange}
@@ -48,7 +48,7 @@ export class Searchbar extends Component {
             autoFocus
             placeholder="Search images and photos"
           />
-        </Form>
+        </form>
       </header>
     );
   }
