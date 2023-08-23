@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 
 import React, { Component } from 'react';
@@ -35,11 +36,16 @@ export class Searchbar extends Component {
             variant="outlined"
             startIcon={<SearchIcon />}
             type="submit"
-            sx={{ bgcolor: `primary.light`, color: 'white' }}
+            sx={{ bgcolor: `primary.light`, color: 'white', margin: '8px' }}
           >
             <span>Search</span>
           </Button>
-          <input
+          <TextField
+            sx={{
+              borderRadius: '4px',
+            }}
+            variant="outlined"
+            label="Search images and photos"
             name="query"
             value={query}
             onChange={this.hendeleChange}
