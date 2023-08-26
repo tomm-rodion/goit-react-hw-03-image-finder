@@ -18,14 +18,14 @@ export class Modal extends Component {
   };
 
   handleOverlayClick = e => {
-    if (e.target === e.carrentTarget) {
+    if (e.target === e.currentTarget) {
       this.props.onClose();
     }
   };
   render() {
     const { largeImg, onClose } = this.props;
     return createPortal(
-      <div className="Overlay" onClick={onClose}>
+      <div className="Overlay" onClick={(onClose, this.handleOverlayClick)}>
         <div className="Modal">
           <img src={largeImg} alt="bigImg" />
         </div>
