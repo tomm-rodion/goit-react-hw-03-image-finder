@@ -43,6 +43,7 @@ export class Searchbar extends Component {
           <TextField
             sx={{
               borderRadius: '4px',
+              margin: '8px 0',
             }}
             variant="outlined"
             label="Search images and photos"
@@ -52,7 +53,7 @@ export class Searchbar extends Component {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            // placeholder="Search images and photos"
           />
         </form>
       </header>

@@ -29,6 +29,7 @@ export class App extends Component {
 
   handleFeachImg = async (query, page) => {
     try {
+      this.setState({ isLoading: true });
       const resp = await fetchImg(query, page);
       this.setState(({ images }) => ({
         images: page === 1 ? [...resp.hits] : [...images, ...resp.hits],
@@ -42,36 +43,21 @@ export class App extends Component {
   };
 
   handleLoadMore = () => {
-    this.setState(({ page }) => ({ page: page + 1, isLoading: true }));
+    this.setState(({ page }) => ({ page: page + 1 }));
   };
 
   handleSubmit = query => {
     console.log('handleSubmit: ', query);
-    this.setState({ query, isLoading: true, images: [] });
+    this.setState({ query, images: [], totalImgs: 0 });
   };
 
   renderButtonOnLoader = () => {
-    return this.state.isLoading ? (
-      <Loader />
-    ) : (
-      this.state.images.length !== 0 &&
-        this.state.images.length < this.state.totalImgs && (
-          <Button
-            variant="outlined"
-            sx={{
-              bgcolor: `primary.light`,
-              color: 'white',
-              marginTop: '12px',
-            }}
-            onClick={this.handleLoadMore}
-          >
-            Load More
-          </Button>
-        )
-    );
+    return;
   };
 
   render() {
+    const { images, isLoading, totalImgs } = this.state;
+    const showButton = !isLoading && images.length !== totalImgs;
     return (
       <div
         style={{
@@ -85,8 +71,21 @@ export class App extends Component {
         }}
       >
         <Searchbar onSubmit={this.handleSubmit} />
-        <ImageGallery images={this.state.images} />
-        {this.renderButtonOnLoader()}
+        <ImageGallery images={images} />
+        {isLoading && <Loader />}
+        {showButton && (
+          <Button
+            variant="outlined"
+            sx={{
+              bgcolor: `primary.light`,
+              color: 'white',
+              marginTop: '12px',
+            }}
+            onClick={this.handleLoadMore}
+          >
+            Load More
+          </Button>
+        )}
       </div>
     );
   }

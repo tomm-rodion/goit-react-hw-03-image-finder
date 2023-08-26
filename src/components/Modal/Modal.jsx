@@ -16,6 +16,12 @@ export class Modal extends Component {
       this.props.onClose();
     }
   };
+
+  handleOverlayClick = e => {
+    if (e.target === e.carrentTarget) {
+      this.props.onClose();
+    }
+  };
   render() {
     const { largeImg, onClose } = this.props;
     return createPortal(
